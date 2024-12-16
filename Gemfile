@@ -62,4 +62,6 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem 'devise'
+gem "devise"
+gem "rails-i18n"
+gem "simple_calendar"
