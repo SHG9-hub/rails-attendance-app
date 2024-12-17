@@ -1,4 +1,4 @@
-class DashboardController < ApplicationController
+class AttendancesController < ApplicationController
   def index
     @attendances = current_user.attendances.order(created_at: :desc)
   end
