@@ -1,10 +1,29 @@
 Rails.application.routes.draw do
-  # get "users/show"
+
   devise_for :users
-
-get '/', to: 'top#index'
-
-get 'users/:id', to: 'users#show'
-
+  # これにより以下のルートが自動生成されます：
   
+  # 新規登録関連
+  # GET    /users/sign_up         => devise/registrations#new
+  # POST   /users                 => devise/registrations#create
+  
+  # ログイン関連
+  # GET    /users/sign_in         => devise/sessions#new
+  # POST   /users/sign_in         => devise/sessions#create
+  # DELETE /users/sign_out        => devise/sessions#destroy
+  
+  # パスワード関連
+  # GET    /users/password/new    => devise/passwords#new
+  # GET    /users/password/edit   => devise/passwords#edit
+  # PUT    /users/password        => devise/passwords#update
+  # POST   /users/password        => devise/passwords#create
+
+  # root 'users#index'
+
+  # get '/', to: 'users#index'        # トップページ（仮）
+  get '/users', to: 'users#index'   # ユーザー一覧ページ
+  get 'users/:id', to: 'users#show', as: :user # ユーザー詳細ページ
+
+
 end
+
