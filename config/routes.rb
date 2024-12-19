@@ -18,11 +18,22 @@ Rails.application.routes.draw do
   # PUT    /users/password        => devise/passwords#update
   # POST   /users/password        => devise/passwords#create
 
-  # root 'users#index'
+  # ユーザーの操作するルーティング
+  # get '/users', to: 'users#index', as: :user_list   # ユーザー一覧ページ
+  # get 'users/:id', to: 'users#show', as: :user # ユーザー詳細ページ
 
-  # get '/', to: 'users#index'        # トップページ（仮）
-  get '/users', to: 'users#index'   # ユーザー一覧ページ
-  get 'users/:id', to: 'users#show', as: :user # ユーザー詳細ページ
+  # 下記構文使用必須。
+  resources :users, only: %i[show index]  do
+    resources :attendances, only: %i[new create] 
+  end
+
+  # 今回ルートをこのようにネストさせた。
+  # これにより、アテンダンスのパスはuserを親としてattendanceは子になる。
+  # 例)users/:use_id/attendances/new となる。
+  #
+  #
+
+  
 
 
 end

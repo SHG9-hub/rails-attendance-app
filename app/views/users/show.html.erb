@@ -1,9 +1,20 @@
 <h1>ユーザー詳細</h1>
 
 <p>メールアドレス: <%= @user.email %></p>
-<p>登録日: <%= @user.created_at.strftime('%Y年%m月%d日') %></p><br>
+<p>登録日: <%= @user.created_at.strftime('%Y年%m月%d日') %></p>
 
-<%= link_to '一覧に戻る', '/users' %>
+<h2>勤怠情報</h2>
+<table>
+  <thead>
+    <tr>
+      <th>出勤時間</th>
+      <th>退勤時間</th>
+      <th>勤務時間</th>
+    </tr>
+  </thead>
+  
+</table>
 
-<%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>  <!-- ログアウトボタン -->
 
+<%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>
+<%= link_to '一覧に戻る', users_path %>

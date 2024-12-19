@@ -1,0 +1,17 @@
+<h1>勤怠記録画面<h1>
+
+<%= form_with(model: [@user, @attendance], local: true) do |form| %>
+    <div>
+        <%= form.label :check_in %>
+        <%= form.datetime_select :check_in %>
+    </div>
+    <div>
+        <%= form.label :check_out %>
+        <%= form.datetime_select :check_out %>
+    <div>
+    <%= form.submit '打刻' %>
+    </div>
+<% end %>
+
+
+
