@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @attendances = @user.attendances  # ユーザーのアテンダンスを取得
-    # @attendance = Attendance.new  # 新しいアテンダンスオブジェクトを作成
   end
 
 # このユーザーコンロローラーではrailsの７つのアクションのうち、２しか使用していないが

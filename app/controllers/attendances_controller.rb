@@ -5,6 +5,22 @@ class AttendancesController < ApplicationController
         @attendance =  Attendance.new
     end
 
+    def create
+        @user = User.find(params[:user_id])
+        @attendance = @user.attendances.new(attendance_params)  # パラメータを設定
+    
+        if @attendance.save
+            redirect_to user_path(@user), notice: "打刻が成功しました。"  # 成功時はリダイレクト
+        else
+            render :new  # 失敗時は新規作成フォームを再表示
+        end
+    end
+    
+    private
+    
+    def attendance_params
+        params.require(:attendance).permit(:check_in, :check_out)  # 必要なパラメータを許可
+    end
 end
 
 

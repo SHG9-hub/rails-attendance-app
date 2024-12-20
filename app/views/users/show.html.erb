@@ -12,9 +12,37 @@
       <th>勤務時間</th>
     </tr>
   </thead>
-  
+  <tbody>
+    <% @attendances.each do |attendance| %>
+      <tr>
+        <td><%= attendance.check_in.strftime('%Y年%m月%d日 %H:%M') if attendance.check_in %></td>
+        <td><%= attendance.check_out.strftime('%Y年%m月%d日 %H:%M') if attendance.check_out %></td>
+        <td>
+          <% if attendance.check_in && attendance.check_out %>
+            <%= ((attendance.check_out - attendance.check_in) / 3600).round(2) %> 時間
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
+<h2>打刻</h2>
+<%= form_with(model: [@user, Attendance.new], local: true) do |form| %>
+  <div>
+    <%= form.label :check_in %>
+    <%= form.datetime_select :check_in %>
+  </div>
+  <div>
+    <%= form.label :check_out %>
+    <%= form.datetime_select :check_out %>
+  </div>
+  <div>
+    <%= form.submit '打刻' %>
+  </div>
+<% end %>
 
 <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>
 <%= link_to '一覧に戻る', users_path %>
