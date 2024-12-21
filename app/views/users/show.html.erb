@@ -40,11 +40,12 @@
   </div>
 <% end %>
 
+
 <h2>退勤打刻</h2>
 <%= form_with(model: [@user, Attendance.new], local: true) do |form| %>
   <div>
     <%= form.label :check_out %>
-    <%= form.datetime_select :check_out %>
+    <%= form.datetime_select :check_out %>  <!-- datetime_selectをここに移動 -->
   </div>
   <div>
     <%= form.submit '退勤打刻' %>
