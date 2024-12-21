@@ -7,15 +7,25 @@ class AttendancesController < ApplicationController
 
     def create
         @user = User.find(params[:user_id])
-        @attendance = @user.attendances.new(attendance_params)  # パラメータを設定
+        @attendance = @user.attendances.new(attendance_params)
     
         if @attendance.save
-            redirect_to user_path(@user), notice: "打刻が成功しました。"  # 成功時はリダイレクト
+          redirect_to user_path(@user), notice: "打刻が成功しました。"
         else
-            render :new  # 失敗時は新規作成フォームを再表示
+          render :new
         end
     end
-    
+
+    def update
+        @attendance = Attendance.find(params[:id])
+        
+        if @attendance.update(attendance_params)
+          redirect_to user_path(@attendance.user), notice: "退勤打刻が成功しました。"
+        else
+          render :edit
+        end
+    end
+        
     private
     
     def attendance_params
