@@ -10,6 +10,7 @@
       <th>出勤時間</th>
       <th>退勤時間</th>
       <th>勤務時間</th>
+      <th>操作</th>  <!-- 操作列を追加 -->
     </tr>
   </thead>
   <tbody>
@@ -24,30 +25,11 @@
             -
           <% end %>
         </td>
+        <td>
+          <%= link_to 'Edit Attendance', edit_user_attendance_path(user_id: @user.id, id: attendance.id) %>  <!-- attendance.idを使用 -->
+          <%= link_to '新しい出勤打刻を作成', new_user_attendance_path(@user), class: "btn btn-primary", style: "margin-left: 10px;" %>  <!-- 新しいアテンダンス作成へのリンク -->
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<h2>出勤打刻</h2>
-<%= form_with(model: [@user, Attendance.new], local: true) do |form| %>
-  <div>
-    <%= form.label :check_in %>
-    <%= form.datetime_select :check_in %>
-  </div>
-  <div>
-    <%= form.submit '出勤打刻' %>
-  </div>
-<% end %>
-
-
-<h2>退勤打刻</h2>
-<%= form_with(model: [@user, Attendance.new], local: true) do |form| %>
-  <div>
-    <%= form.label :check_out %>
-    <%= form.datetime_select :check_out %>  <!-- datetime_selectをここに移動 -->
-  </div>
-  <div>
-    <%= form.submit '退勤打刻' %>
-  </div>
-<% end %>

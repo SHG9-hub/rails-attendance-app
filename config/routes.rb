@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
   # 下記構文使用必須。
   resources :users, only: %i[show index]  do
-    resources :attendances, only: %i[new create update] 
+    resources :attendances, only: %i[new create update edit ] 
   end
 
   # 今回ルートをこのようにネストさせた。

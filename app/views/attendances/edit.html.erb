@@ -1,15 +1,13 @@
-<h1>新しい出勤打刻</h1>
+<h1>退勤打刻</h1>
 
 <%= form_with(model: [@user, @attendance], local: true) do |form| %>
   <div>
-    <%= form.label :check_in %>
-    <%= form.datetime_select :check_in %>
+    <%= form.label :check_out %>
+    <%= form.datetime_select :check_out %>
   </div>
   <div>
-    <%= form.submit '出勤打刻' %>
+    <%= form.submit '退勤打刻' %>
   </div>
 <% end %>
 
 <%= link_to '戻る', user_path(@user) %>
-
-
