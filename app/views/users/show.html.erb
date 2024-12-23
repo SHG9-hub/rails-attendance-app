@@ -7,6 +7,9 @@
 <div style="margin-bottom: 20px;">
   <%= link_to '新しい出勤打刻を作成', new_user_attendance_path(@user), class: "btn btn-primary" %>
 </div>
+<div style="margin-bottom: 20px;">
+  <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, data: { confirm: '本当にログアウトしますか？' }, class: "btn btn-danger" %>
+</div>
 
 <h2>勤怠情報</h2>
 <table>
