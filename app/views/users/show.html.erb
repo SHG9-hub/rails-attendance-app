@@ -3,6 +3,11 @@
 <p>メールアドレス: <%= @user.email %></p>
 <p>登録日: <%= @user.created_at.strftime('%Y年%m月%d日') %></p>
 
+<!-- 新しい出勤打刻を作成するリンクをページ上部に配置 -->
+<div style="margin-bottom: 20px;">
+  <%= link_to '新しい出勤打刻を作成', new_user_attendance_path(@user), class: "btn btn-primary" %>
+</div>
+
 <h2>勤怠情報</h2>
 <table>
   <thead>
@@ -10,7 +15,7 @@
       <th>出勤時間</th>
       <th>退勤時間</th>
       <th>勤務時間</th>
-      <th>操作</th>  <!-- 操作列を追加 -->
+      <th>退勤</th>  <!-- 操作列を追加 -->
     </tr>
   </thead>
   <tbody>
@@ -26,8 +31,7 @@
           <% end %>
         </td>
         <td>
-          <%= link_to 'Edit Attendance', edit_user_attendance_path(user_id: @user.id, id: attendance.id) %>  <!-- attendance.idを使用 -->
-          <%= link_to '新しい出勤打刻を作成', new_user_attendance_path(@user), class: "btn btn-primary", style: "margin-left: 10px;" %>  <!-- 新しいアテンダンス作成へのリンク -->
+          <%= link_to '退勤', edit_user_attendance_path(user_id: @user.id, id: attendance.id) %>  <!-- attendance.idを使用 -->
         </td>
       </tr>
     <% end %>

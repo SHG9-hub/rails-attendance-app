@@ -23,11 +23,17 @@ class AttendancesController < ApplicationController
 
   def update
     @attendance = @user.attendances.find_by(id: params[:id])
-    if @attendances.update(attendance_params)
+    if @attendance.update(attendance_params)
       redirect_to user_path(@user)
     else
       render :edit
     end
+  end
+
+  def destroy
+      @attendance = @user.attendances.find_by(id: params[:id])
+      @attendance.destroy
+      redirect_to user_path(@user)
   end
 
   private
