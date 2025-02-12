@@ -37,6 +37,12 @@ class AttendancesController < ApplicationController
       redirect_to user_path(@user)
   end
 
+  def index
+    binding.pry
+    @attendance = @user.attendances_for_month(params[:year], params[:month])
+  
+  end
+
   private
 
   # ユーザーを設定するメソッド
