@@ -9,6 +9,7 @@ class AttendancesController < ApplicationController
   def create
     @attendance = @user.attendances.new(attendance_params)
 
+
     if @attendance.save
       redirect_to user_path(@user), notice: "出勤打刻が成功しました。"
     else

@@ -1,19 +1,19 @@
-<h1>アテンダンスの編集</h1>
+<h1>退勤</h1>
 
 <div>
   <strong>出勤時間:</strong>
-  <%= @attendance.check_in.strftime('%Y年%m月%d日 %H:%M') if @attendance.check_in %>  <!-- 出勤時間を表示 -->
+  <%= @attendance.check_in.strftime('%Y年%m月%d日 %H:%M') if @attendance.check_in %>  
 </div>
 
 <div>
   <strong>退勤時間:</strong>
-  <%= Time.current.strftime('%Y年%m月%d日 %H:%M') %>  <!-- 現在の日時を表示 -->
+  <%= Time.now.strftime('%Y年%m月%d日 %H:%M') %>  
   <%= form_with(model: [@user, @attendance], local: true) do |form| %>
-    <div>
-      <%= form.hidden_field :check_in, value: @attendance.check_in %>  <!-- 出勤時間を隠しフィールドとして設定 -->
-      <%= form.hidden_field :check_out, value: Time.current %>  <!-- 現在の日時を隠しフィールドとして設定 -->
-    </div>
-    <div>
+  <div>
+    <strong>退勤時間:</strong>
+    <%= form.datetime_field :check_out, include_blank: true %> <!-- 退勤時間の選択 -->
+  </div>
+      <div>
       <%= form.submit '退勤' %>
     </div>
   <% end %>

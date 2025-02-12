@@ -1,11 +1,10 @@
 <h1>新しい出勤打刻</h1>
 
 <%= form_with(model: [@user, @attendance], local: true) do |form| %>
-  <div>
-    <%= form.hidden_field :check_in, value: Time.current %>  <!-- 現在の日時を隠しフィールドとして設定 -->
-    <strong>出勤時間:</strong>
-    <%= Time.current.strftime('%Y年%m月%d日 %H:%M') %>  <!-- 現在の日時を表示 -->
-  </div>
+<div>
+  <strong>出勤時間:</strong>
+  <%= form.datetime_field :check_in, include_blank: true %> 
+</div>
   <div>
     <%= form.submit '出勤打刻' %>
   </div>
