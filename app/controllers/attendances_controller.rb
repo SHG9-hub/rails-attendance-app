@@ -39,8 +39,7 @@ class AttendancesController < ApplicationController
 
   def index
     # binding.pry
-    @attendance = @user.attendances_for_month(params[:year], params[:month])
-  
+    @attendances = @user.attendances_for_month(params[:year], params[:month])
   end
 
   private

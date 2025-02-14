@@ -1,6 +1,18 @@
-<h1>
-  <%= @user.id %>の出勤データ（<%= params[:year] %>年<%= params[:month] %>月）
-</h1>
+<h1><%= @user.id %>の出勤データ</h1>
+
+<%= form_with url: user_attendances_path(@user), method: :get do %>
+<div>
+  <label for="year">年:</label>
+  <%= select_tag :year, options_for_select((2020..Date.today.year).to_a,
+  params[:year]) %>
+</div>
+<div>
+  <label for="month">月:</label>
+  <%= select_tag :month, options_for_select((1..12).to_a, params[:month]) %>
+</div>
+<div><%= submit_tag '表示' %></div>
+<% end %> <% total_work_seconds = 0 %>
+<!-- 合計労働時間を初期化 -->
 
 <table>
   <thead>
@@ -11,18 +23,28 @@
     </tr>
   </thead>
   <tbody>
-    <% @attendance.each do |attendance| %>
+    <% @attendances.each do |attendance| %>
     <tr>
       <td><%= attendance.check_in.strftime("%Y-%m-%d") %></td>
       <td><%= attendance.check_in.strftime("%H:%M") %></td>
       <td>
-        <%= attendance.check_out.strftime("%H:%M") if attendance.check_out %>
+        <% if attendance.check_in && attendance.check_out %> <% total_seconds =
+        (attendance.check_out - attendance.check_in).to_i %> <%
+        total_work_seconds += total_seconds %>
+        <!-- 合計労働時間に加算 -->
+        <% hours = total_seconds / 3600 %> <% minutes = (total_seconds % 3600) /
+        60 %> <%= "#{hours}時間#{minutes}分" %> <% else %> - <% end %>
       </td>
     </tr>
     <% end %>
   </tbody>
 </table>
 
-<% if @attendance.empty? %>
+<% if total_work_seconds > 0 %> <% total_hours = total_work_seconds / 3600 %> <%
+total_minutes = (total_work_seconds % 3600) / 60 %>
+<p>合計労働時間: <%= total_hours %>時間 <%= total_minutes %>分</p>
+<% else %>
+<p>この月の合計労働時間はありません。</p>
+<% end %> <% if @attendances.empty? %>
 <p>この月の出勤データはありません。</p>
 <% end %> <%= link_to '戻る', user_path(@user) %>

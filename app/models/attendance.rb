@@ -4,6 +4,7 @@ class Attendance < ApplicationRecord
   # def self.attendance_data(year, month)
   #   where("strftime('%Y-%m', check_in) = ?", "#{year}-#{month}")
   # end
+
   
 
 
