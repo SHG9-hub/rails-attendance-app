@@ -2,24 +2,24 @@
 
 <div>
   <strong>出勤時間:</strong>
-  <%= @attendance.check_in.strftime('%Y年%m月%d日 %H:%M') if @attendance.check_in %>  
+  <%= @attendance.check_in.strftime('%Y年%m月%d日 %H:%M') if
+  @attendance.check_in %>
 </div>
 
 <div>
   <strong>退勤時間:</strong>
-  <%= Time.now.strftime('%Y年%m月%d日 %H:%M') %>  
-  <%= form_with(model: [@user, @attendance], local: true) do |form| %>
+  <%= Time.now.strftime('%Y年%m月%d日 %H:%M') %> <%= form_with(model: [@user,
+  @attendance], local: true) do |form| %>
   <div>
     <strong>退勤時間:</strong>
-    <%= form.datetime_field :check_out, include_blank: true %> <!-- 退勤時間の選択 -->
+    <%= form.datetime_field :check_out, include_blank: true %>
+    <!-- 退勤時間の選択 -->
   </div>
-      <div>
-      <%= form.submit '退勤' %>
-    </div>
+  <div><%= form.submit '退勤' %></div>
   <% end %>
 </div>
 
 <!-- 削除ボタンを追加 -->
-<%= button_to '削除(仮)', user_attendance_path(@user, @attendance), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" %>
-
+<%= button_to '削除(仮)', user_attendance_path(@user, @attendance), method:
+:delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" %>
 <%= link_to '戻る', user_path(@user) %>

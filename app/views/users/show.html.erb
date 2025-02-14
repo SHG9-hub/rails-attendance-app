@@ -2,12 +2,12 @@
 
 <p>メールアドレス: <%= @user.email %></p>
 <div style="margin-bottom: 20px">
-  <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, data: { confirm: '本当にログアウトしますか？' }, class: "btn btn-danger" %>
+  <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>
 </div>
 
-
-<div style="margin-bottom: 20px;">
-  <%= link_to '新しい出勤打刻を作成', new_user_attendance_path(@user), class: "btn btn-primary" %>
+<div style="margin-bottom: 20px">
+  <%= link_to '新しい出勤打刻を作成', new_user_attendance_path(@user), class:
+  "btn btn-primary" %>
 </div>
 
 <h2>勤怠情報</h2>
@@ -17,33 +17,37 @@
       <th>出勤時間</th>
       <th>退勤時間</th>
       <th>勤務時間</th>
-      <th>退勤</th>  
+      <th>退勤</th>
     </tr>
   </thead>
   <tbody>
     <% @attendances.each do |attendance| %>
-      <tr>
-        <td><%= attendance.check_in.strftime('%Y年%m月%d日 %H:%M') if attendance.check_in %></td>
-        <td><%= attendance.check_out.strftime('%Y年%m月%d日 %H:%M') if attendance.check_out %></td>
-        <td>
-          <% if attendance.check_in && attendance.check_out %>
-            <% total_seconds = (attendance.check_out - attendance.check_in).to_i %>
-            <% hours = total_seconds / 3600 %>
-            <% minutes = (total_seconds % 3600) / 60 %>
-            <%= "#{hours}時間#{minutes}分" %>
-          <% else %>
-            -
-          <% end %>
-        <td>
-          <%= link_to '退勤', edit_user_attendance_path(user_id: @user.id, id: attendance.id) %> 
-        </td>
-      </tr>
+    <tr>
+      <td>
+        <%= attendance.check_in.strftime('%Y年%m月%d日 %H:%M') if
+        attendance.check_in %>
+      </td>
+      <td>
+        <%= attendance.check_out.strftime('%Y年%m月%d日 %H:%M') if
+        attendance.check_out %>
+      </td>
+      <td>
+        <% if attendance.check_in && attendance.check_out %> <% total_seconds =
+        (attendance.check_out - attendance.check_in).to_i %> <% hours =
+        total_seconds / 3600 %> <% minutes = (total_seconds % 3600) / 60 %> <%=
+        "#{hours}時間#{minutes}分" %> <% else %> - <% end %>
+      </td>
+
+      <td>
+        <%= link_to '退勤', edit_user_attendance_path(user_id: @user.id, id:
+        attendance.id) %>
+      </td>
+    </tr>
     <% end %>
   </tbody>
   <tfoot>
     <tr>
-      <td>
-        <%= '今月の労働時間:' %>
-      </td>
+      <td><%= '月の労働時間:' %></td>
     </tr>
+  </tfoot>
 </table>

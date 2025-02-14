@@ -3,11 +3,7 @@
 <%= form_with(model: [@user, @attendance], local: true) do |form| %>
 <div>
   <strong>出勤時間:</strong>
-  <%= form.datetime_field :check_in, include_blank: true %> 
+  <%= form.datetime_field :check_in, include_blank: true %>
 </div>
-  <div>
-    <%= form.submit '出勤打刻' %>
-  </div>
-<% end %>
-
-<%= link_to '戻る', user_path(@user) %>
+<div><%= form.submit '出勤打刻' %></div>
+<% end %> <%= link_to '戻る', user_path(@user) %>

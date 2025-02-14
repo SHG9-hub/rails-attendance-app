@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   devise_for :users
   # これにより以下のルートが自動生成されます：
   

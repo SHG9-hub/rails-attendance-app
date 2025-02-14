@@ -1,3 +1,28 @@
-<h1>各月のデータ</h1>
+<h1>
+  <%= @user.id %>の出勤データ（<%= params[:year] %>年<%= params[:month] %>月）
+</h1>
 
-<%= @attendance.count %>
+<table>
+  <thead>
+    <tr>
+      <th>日付</th>
+      <th>出勤時間</th>
+      <th>退勤時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @attendance.each do |attendance| %>
+    <tr>
+      <td><%= attendance.check_in.strftime("%Y-%m-%d") %></td>
+      <td><%= attendance.check_in.strftime("%H:%M") %></td>
+      <td>
+        <%= attendance.check_out.strftime("%H:%M") if attendance.check_out %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if @attendance.empty? %>
+<p>この月の出勤データはありません。</p>
+<% end %> <%= link_to '戻る', user_path(@user) %>
